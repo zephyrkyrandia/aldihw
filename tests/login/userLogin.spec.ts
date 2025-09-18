@@ -1,6 +1,7 @@
 import { test } from '@playwright/test';
 import { LoginPage } from '../../pages/Login.Page';
 import { HeaderPage } from '../../pages/header.page';
+import { TestDataForLoginTest } from '../../resources/test.data';
 
 
 test('Successful login redirects to dashboard', async ({ page }) => {
@@ -10,7 +11,10 @@ test('Successful login redirects to dashboard', async ({ page }) => {
   await headerPage.goto();
   await headerPage.click_ButtonLogin();
 
-  await loginPage.login('zephyrkyrandia@outlook.com', 'Zoldfoki1!');
+  await loginPage.login(
+    TestDataForLoginTest.usernameCorrect,
+    TestDataForLoginTest.passwordCorrect
+  );
 
   await headerPage.isVisible_ButtonAccount();
 });
@@ -22,7 +26,10 @@ test('Invalid password shows error message', async ({ page }) => {
   await headerPage.goto();
   await headerPage.click_ButtonLogin();
 
-  await loginPage.login('zephyrkyrandia@outlook.com', 'WRONGZoldfoki1!');
+  await loginPage.login(
+    TestDataForLoginTest.usernameCorrect,
+    TestDataForLoginTest.passwordIncorrect
+  );
 
   await loginPage.assertErrorMessage('Oops. Login failed.');
 });
@@ -34,7 +41,9 @@ test('Invalid username shows error message', async ({ page }) => {
   await headerPage.goto();
   await headerPage.click_ButtonLogin();
 
-  await loginPage.login('WRONGzephyrkyrandia@outlook.com', 'Zoldfoki1!');
+  await loginPage.login(
+    TestDataForLoginTest.usernameIncorrect,
+    TestDataForLoginTest.passwordCorrect);
 
   await loginPage.assertErrorMessage('Oops. Login failed.');
 });

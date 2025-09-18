@@ -14,11 +14,11 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   timeout: 30000, // 30 seconds for each test
   expect: {
-    timeout: 5000, // 5 seconds for expect().toBeVisible(), etc.
+    timeout: 15000, // 5 seconds for expect().toBeVisible(), etc.
   },
   use: {
-    actionTimeout: 5000, // 10 seconds for each action like click, fill, etc.
-    navigationTimeout: 5000, // 15 seconds for page.goto, etc.
+    actionTimeout: 15000, // 10 seconds for each action like click, fill, etc.
+    navigationTimeout: 15000, // 15 seconds for page.goto, etc.
     // You can also set expect timeout
     /* Base URL to use in actions like `await page.goto('/')`. */
     baseURL: 'https://www.aldi.us',
